@@ -4,7 +4,45 @@
 
 ## プロジェクト概要
 
-タスクボードアプリケーション。
+タスクボードアプリケーション。タスクの追加・完了切り替え・削除ができ、localStorageで永続化している。
+
+## デプロイ先
+
+https://satsukidesign0305.github.io/task-board/
+
+mainブランチへのプッシュで GitHub Actions が自動ビルド・デプロイする。
+
+## 技術スタック
+
+| 項目 | 内容 |
+|------|------|
+| フレームワーク | React 19 |
+| ビルドツール | Vite 6 |
+| 言語 | JavaScript (JSX) |
+| スタイリング | CSS（`src/index.css` 1ファイルで管理） |
+| 永続化 | localStorage |
+| CI/CD | GitHub Actions (`.github/workflows/deploy.yml`) |
+
+## コンポーネント構成と命名規約
+
+```
+src/
+  App.jsx                  # ルートコンポーネント。state管理とハンドラを集約
+  components/
+    TaskInput.jsx          # タスク入力フォーム
+    TaskList.jsx           # タスク一覧（ TaskItem のリストを描画）
+    TaskItem.jsx           # 個別タスク（チェックボックス・削除ボタン）
+  index.css                # グローバルスタイル
+  main.jsx                 # エントリーポイント
+```
+
+### 命名規約
+
+- **コンポーネントファイル**: PascalCase（例: `TaskItem.jsx`）
+- **コンポーネント関数**: PascalCase のデフォルトエクスポート（例: `export default function TaskItem`）
+- **propsのハンドラ**: `on` プレフィックス（例: `onAdd`, `onToggle`, `onDelete`）
+- **CSSクラス名**: kebab-case（例: `.task-item`, `.delete-btn`）
+- **localStorageキー**: kebab-case（例: `task-board-tasks`）
 
 ## Git運用ルール
 
